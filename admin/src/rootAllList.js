@@ -1,0 +1,31 @@
+﻿// 用户所有的权限列表
+export default [
+  {
+    name:'首页',
+    icon:'home',
+    path:'/admin/home',
+    id:'0'
+  },
+  {
+    name:'商品管理',
+    icon:"appstore",
+    path:'',
+    id:'2',
+    children:[
+      {
+        name:'商品列表',
+        id:'2-0'
+      },
+      {
+        name:'商品添加',
+        id:'2-1'
+      }
+    ]
+  },
+  {
+    name:'设置',
+    icon:'setting',
+    path:'/admin/setting',
+    id:'1'
+  }
+]
