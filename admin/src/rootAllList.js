@@ -7,25 +7,45 @@ export default [
     id:'0'
   },
   {
-    name:'商品管理',
+    name:'通知公告',
     icon:"appstore",
     path:'',
     id:'2',
     children:[
       {
-        name:'商品列表',
+        name:'学校公告',
         id:'2-0'
       },
-      {
-        name:'商品添加',
-        id:'2-1'
-      }
     ]
   },
   {
-    name:'设置',
-    icon:'setting',
-    path:'/admin/setting',
-    id:'1'
-  }
+    name:'实习中',
+    icon:'rise',
+    id:'1',
+    children:[
+      {
+        name:'我的日报',
+        id:'2-0'
+      },
+      {
+        name:'我的周报',
+        id:'2-1'
+      },
+      {
+        name:'我的月报',
+        id:'2-2'
+      },
+    ]
+  },
+  {
+    name:'实习后',
+    icon:'sketch',
+    id:'3',
+    children:[
+      {
+        name:'我的总结',
+        id:'3-1'
+      },
+    ]
+  },
 ]
