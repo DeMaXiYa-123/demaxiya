@@ -111,7 +111,7 @@ class Login extends Component{
                     }>
                         {/* 登录 */}
                         <div onSubmit={this.handleSubmit} style={{display:logintype=='reg'?'none':'block'}}>
-                            <Form.Item className={style.form}>
+                            <Form.Item>
                                 {getFieldDecorator('us',{
                                     rules: [{ required: true, message: '请输入账号' }],
                                 })(
@@ -123,7 +123,7 @@ class Login extends Component{
                                     />
                                 )} 
                             </Form.Item>
-                            <Form.Item className={style.form}>
+                            <Form.Item>
                                 {getFieldDecorator('ps',{
                                     rules: [{ required: true, message: '请输入密码' }],
                                 })(
@@ -137,7 +137,7 @@ class Login extends Component{
                             </Form.Item>
                             <Form.Item className={style.yzm}>
                                 {getFieldDecorator('yzm',{
-                                    rules: [{ required: true }],
+                                    rules: [{ required: true, message:'请输入验证码'}],
                                 })(
                                     <Input
                                     placeholder="验证码"
@@ -161,7 +161,7 @@ class Login extends Component{
                         </div>
                         {/* 注册 */}
                         <div onSubmit={this.handleSubmit} style={{display:logintype=='reg'?'block':'none'}}>
-                            <Form.Item className={style.form}>
+                            <Form.Item>
                                 {getFieldDecorator('us',{
                                     rules: [{ required: true, message: '请输入手机号' }],
                                 })(
@@ -174,7 +174,7 @@ class Login extends Component{
                                     />
                                 )} 
                             </Form.Item>
-                            <Form.Item className={style.form}>
+                            <Form.Item>
                                 {getFieldDecorator('ps',{
                                     rules: [{ required: true, message: '请输入密码' }],
                                 })(
