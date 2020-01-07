@@ -45,8 +45,13 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
+<<<<<<< HEAD
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+=======
+const lessRegex = /\.(less)$/;
+const lessModuleRegex = /\.module\.(less)$/;
+>>>>>>> master
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -374,6 +379,10 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
+<<<<<<< HEAD
+=======
+                  ['import',{ "libraryName": "antd", style: true }],
+>>>>>>> master
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
@@ -458,14 +467,23 @@ module.exports = function(webpackEnv) {
             // By default we support SASS Modules with the
             // extensions .module.scss or .module.sass
             {
+<<<<<<< HEAD
               test: sassRegex,
               exclude: sassModuleRegex,
+=======
+              test: lessRegex,
+              exclude: lessModuleRegex,
+>>>>>>> master
               use: getStyleLoaders(
                 {
                   importLoaders: 2,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                 },
+<<<<<<< HEAD
                 'sass-loader'
+=======
+                'less-loader'
+>>>>>>> master
               ),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
@@ -476,7 +494,11 @@ module.exports = function(webpackEnv) {
             // Adds support for CSS Modules, but using SASS
             // using the extension .module.scss or .module.sass
             {
+<<<<<<< HEAD
               test: sassModuleRegex,
+=======
+              test: lessModuleRegex,
+>>>>>>> master
               use: getStyleLoaders(
                 {
                   importLoaders: 2,
@@ -485,7 +507,11 @@ module.exports = function(webpackEnv) {
                     getLocalIdent: getCSSModuleLocalIdent,
                   },
                 },
+<<<<<<< HEAD
                 'sass-loader'
+=======
+                'less-loader'
+>>>>>>> master
               ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
