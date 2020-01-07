@@ -14,7 +14,8 @@ export default [
     children:[
       {
         name:'学校公告',
-        id:'2-0'
+        id:'2-0',
+        path:'/admin/schoolNotice'
       },
     ]
   },

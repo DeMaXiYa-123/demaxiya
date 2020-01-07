@@ -1,5 +1,6 @@
 import React, { Profiler } from 'react'
 import styles from '../../pages/index/index.module.less'
+import {Link} from 'react-router-dom'
 import { Icon, Button } from 'antd'
 import 'echarts/dist/echarts.js'
 import ReactEcharts from 'echarts-for-react'
@@ -91,7 +92,7 @@ class Cont extends React.Component {
                     </div>
                 </div>
                 <div style={{ width: '28%', height: '340px', background: '#fff', float: 'left', marginTop: '16px', borderRadius: '6px' }}>
-                    <h2 style={{ width: '100%', textAlign: 'left', paddingLeft: '16px', height: '57px', lineHeight: '57px', fontSize: '14px', fontWeight: '600', borderBottom: '1px solid #dde' }}>学校公告<span style={{ float: 'right', marginRight: '10px', fontWeight: '400', fontSize: '12px', cursor: 'pointer', color: '#999' }}>更多<Icon type="right" /></span></h2>
+                    <h2 style={{ width: '100%', textAlign: 'left', paddingLeft: '16px', height: '57px', lineHeight: '57px', fontSize: '14px', fontWeight: '600', borderBottom: '1px solid #dde' }}>学校公告 <Link to='/admin/schoolNotice'><span style={{ float: 'right', marginRight: '10px', fontWeight: '400', fontSize: '12px', cursor: 'pointer', color: '#999' }}>更多<Icon type="right" /></span></Link></h2>
                 </div>
                 <div style={{ width: '97.5%', height: '340px', background: '#fff', float: 'left', margin: '22px 16px', borderRadius: '6px' }}>
                     <h2 style={{ width: '100%', textAlign: 'left', paddingLeft: '16px', height: '57px', lineHeight: '57px', fontSize: '14px', fontWeight: '600', borderBottom: '1px solid #dde' }}>我的报告</h2>
