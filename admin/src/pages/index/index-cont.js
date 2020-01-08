@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import { Icon, Button } from 'antd'
 import 'echarts/dist/echarts.js'
 import ReactEcharts from 'echarts-for-react'
+import axios from '../../utils/axios'
 class Cont extends React.Component {
     constructor() {
         super()
@@ -59,7 +60,7 @@ class Cont extends React.Component {
         }
     }
     btncss(value, e) {
-        console.log(value)
+        // console.log(value)
         if (value == 1) {
             e.target.style.background = '#43CD80'
         } else {
@@ -69,9 +70,17 @@ class Cont extends React.Component {
     componentDidMount(){
             for(let key in this.refs){
                 let i = key.slice(key.length-1,key.length)
-                console.log(i)
+                // console.log(i)
                 this.refs[key].style.background = this.state.list[i].color
             }
+            this.getData()
+    }
+    getData(){
+        let url = '/api/admin/user'
+        axios.post(url)
+        .then(data=>{
+            console.log(data)
+        })
     }
     render() {
         return (
