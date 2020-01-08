@@ -87,7 +87,7 @@ class Nav extends React.Component{
 
                       <Dropdown overlay={this.menu3.bind(this,this.state.list)}>
                         <a className="ant-dropdown-link" href="#">
-                        <Icon type="bell" theme="filled" style={{color:'#fff',lineHeight:'35px'}} onClick={this.showModal} /> <span style={{background:'#f56c6c',display:'block',position:'absolute', width:'26px',height:'18px',color:'#fff',borderRadius:'8px',lineHeight:'18px',fontSize:'12px',top:'-2px',left:'90px'}}>11</span>
+                        <Icon type="bell" theme="filled" style={{color:'#fff',lineHeight:'35px'}} onClick={this.showModal} /> <span style={{background:'#f56c6c',display:'block',position:'absolute', width:'26px',height:'18px',color:'#fff',borderRadius:'8px',lineHeight:'18px',fontSize:'12px',top:'-2px',left:'90px',textAlign:'center'}}>11</span>
                         </a>
                       </Dropdown>
 
