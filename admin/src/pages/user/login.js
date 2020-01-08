@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, Card, Modal, message} from 'antd';
-import style from './login.module.less'
+import style from '../../css/login.module.less'
 import {userLogin,reg} from '../../api/user'
 import {setItem,getItem} from '../../utils/webStorage'
 class Login extends Component{
