@@ -8,15 +8,15 @@ class Nav extends React.Component{
         this.state={
             collapsed: false,
             menu : (
-              <Menu onClick={this.handleMenuClick} style={{width:'100px' , marginLeft:'12px'}}>
-                <Menu.Item key="1">
+              <Menu onClick={this.handleMenuClick.bind(this)} style={{width:'100px' , marginLeft:'12px'}}>
+                <Menu.Item key="1"  onClick={this.showModal}>
                   <Icon type="user" />
                   个人信息
                 </Menu.Item>
-                <Menu.Item key="2">
+                {/* <Menu.Item key="2">
                   <Icon type="user" />
                   修改密码
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item key="3">
                   <Icon type="user" />
                   退出登录
@@ -33,6 +33,7 @@ class Nav extends React.Component{
             ),
             list:['xxx通过了补签申请？','xxx通过了补签申请？','xxx通过了补签申请？','xxx通过了补签申请？'],
             visible: false,
+            visible2 : false,
             userName:'',
           };  
     }
@@ -53,8 +54,12 @@ class Nav extends React.Component{
             )
     }
     handleMenuClick(e) {
-        message.info('Click on menu item.');
+        // message.info('Click on menu item.');
         console.log('click', e);
+        if(e.key == 1){
+          this.setState({visible2:true})
+          console.log(1)
+        }
       }
     getData(){
       let url = '/api/admin/user'
@@ -97,6 +102,25 @@ class Nav extends React.Component{
                         <img src='https://qiniu.gongxueyun.com/upload/f005585371b08470a447374c1a8e85c7.png'></img>{this.state.userName} <Icon type="caret-down" theme="filled" />
                         </Button>
                       </Dropdown>
+
+                      <div>
+                        <Modal
+                          title="个人信息"
+                          visible={this.state.visible2}
+                          onOk={()=>{
+                            this.setState({visible2:false})
+                          }}
+                          onCancel={()=>{
+                            this.setState({visible2:false})
+                          }}
+                        >
+                          <p>姓名  &nbsp;赵子琦</p>
+                          <p>学校  &nbsp;五道口职业技术学院</p>
+                          <p>院系  &nbsp;计算机工程系</p>
+                          <p>专业  &nbsp;计算机应用技术</p>
+                          <p>班级  &nbsp;计应A1703</p>
+                        </Modal>
+                    </div>
                    </div>                
             </div>
         )
