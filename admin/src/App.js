@@ -1,13 +1,12 @@
 import React from 'react';
-import {Button} from 'antd';
-import './App.css';
 import Router from './router/router'
+import Sx from './pages/list/Internship'
 
 function App() {
   return (
-    <div className="App">
-      <Button>123</Button>
-          <Router></Router>
+    <div style={{padding: '16px'}}>
+      <Sx></Sx>
+      <Router></Router>
     </div>
   );
 }
