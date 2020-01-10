@@ -12,6 +12,7 @@ class Cont extends React.Component {
             list:[],
             rootList:[],
             biglist:{},
+            flag:false
         }
     }
     btncss(value, e) {
@@ -82,12 +83,12 @@ class Cont extends React.Component {
     //     }
     //     // console.log(token)
     //   }
-    getData(){
+    async getData(){
         try {
             let url = '/api/admin/user'
             let userName = JSON.parse(localStorage.getItem('uid')).data
             console.log(userName)
-            axios.post(url,{userName})
+            await axios.post(url,{userName})
             .then(data=>{       
                 let value = data.data[0].reportlist;
                 console.log(value)
@@ -102,16 +103,17 @@ class Cont extends React.Component {
                     }
                 }
             })
+            this.setState({flag:true})
         }
         catch(err) {
         }
-    
     }
     render() {
         const { Option } = Select;
         return (
             <div>
                 <div className={styles.top}>
+                {this.state.flag || <img  style={{position:'absolute' ,width:'150px',height:'120px', top:'40%',left:'46%',zIndex:10}} src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578639325890&di=26fb7e43e94ad28d33afad06fd9befd1&imgtype=0&src=http%3A%2F%2Fimg.ui.cn%2Fdata%2Ffile%2F4%2F2%2F3%2F1814324.gif'></img>}
                     {/* <div className={styles.dressing}>{this.state.biglist.grade}<span><Icon type='down' /></span></div> */}
                     <div style={{float:'left',marginRight:'20px',marginLeft:'10px'}}>
                         <Select defaultValue="grade" style={{ width: 200 }} onChange={this.handleChange}>

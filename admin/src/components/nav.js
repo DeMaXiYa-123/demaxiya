@@ -87,6 +87,7 @@ class Nav extends React.Component{
         console.log(this)
     }
     render(){
+      let vb = true;
         return(
             <div className={styles.nav}>
                     <h2 className={styles.logo}>
@@ -140,7 +141,7 @@ class Nav extends React.Component{
                           visible={this.state.visible3}
                           cancelText='取消'
                           okText='确定'
-                          centered='true'
+                          centered={vb}
                           onOk={()=>{
                             this.setState({visible3:false})
                             localStorage.removeItem('token')

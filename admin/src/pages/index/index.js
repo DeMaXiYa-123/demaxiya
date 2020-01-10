@@ -12,6 +12,7 @@ class Index extends React.Component{
         super();
         this.state={
             collapsed: false,
+            flag:false,
           };
     }
     toggle(){

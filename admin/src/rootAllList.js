@@ -26,15 +26,18 @@ export default [
     children:[
       {
         name:'我的日报',
-        id:'1-0'
+        id:'1-0',
+        path:'/admin/day'
       },
       {
         name:'我的周报',
-        id:'1-1'
+        id:'1-1',
+        path:'/admin/week'
       },
       {
         name:'我的月报',
-        id:'1-2'
+        id:'1-2',
+        path:'/admin/mouth'
       },
     ]
   },
