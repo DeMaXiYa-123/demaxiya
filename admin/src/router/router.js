@@ -5,8 +5,13 @@ import Home from '../pages/index/index-cont'
 import Notice from '../pages/notice/notice'
 import Login from '../pages/user/login'
 
+
 class Router extends React.Component{
+    componentDidMount(){
+        console.log(this)
+    }
     render(){
+        
         return(
             <BrowserRouter>
             <Route path='/login' component={Login}></Route>

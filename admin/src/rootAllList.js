@@ -26,15 +26,15 @@ export default [
     children:[
       {
         name:'我的日报',
-        id:'2-0'
+        id:'1-0'
       },
       {
         name:'我的周报',
-        id:'2-1'
+        id:'1-1'
       },
       {
         name:'我的月报',
-        id:'2-2'
+        id:'1-2'
       },
     ]
   },

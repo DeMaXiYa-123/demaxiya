@@ -92,6 +92,11 @@ module.exports = function(proxy, allowedHost) {
         target:'http://192.168.137.20:3003',
         changeOrigin:true,
         pathRewrite:{"^/api":''}
+      },
+      '/user':{
+        target:'http://192.168.137.20:3004',
+        changeOrigin:true,
+        pathRewrite:{"^/user":''}
       }
     },
     before(app, server) {

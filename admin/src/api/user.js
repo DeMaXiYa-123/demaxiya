@@ -2,7 +2,7 @@ import axios from '../utils/axios'
 import {getItem} from '../utils/webStorage'
 export const userLogin=(userName,passWord)=>{
     return new Promise((resolve,reject)=>{
-        let url = '/api/v1/admin/user/login'
+        let url = '/user/v1/admin/user/login'
         axios.post(url,{userName,passWord})
         .then((res)=>{
             resolve(res)
@@ -15,7 +15,7 @@ export const userLogin=(userName,passWord)=>{
 
 export const Logout=()=>{
     return new Promise((resolve,reject)=>{
-        let url = '/api/v1/admin/user/logout'
+        let url = '/user/v1/admin/user/logout'
         let uid = getItem('uid')
         let token = getItem('token')
         console.log(uid)
@@ -32,7 +32,7 @@ export const Logout=()=>{
 
 export const reg=(userName,passWord)=>{
     return new Promise((resolve,reject)=>{
-        let url = '/api/v1/admin/reg/reg'
+        let url = '/user/v1/admin/reg/reg'
         axios.post(url,{userName,passWord})
         .then((res)=>{
             resolve(res)
