@@ -5,6 +5,9 @@ class H2 extends Component {
   constructor() {
     super()
   }
+  fnc = () => {
+    console.log(1)
+  }
   render() {
     const options = [{
       label: '2017级计算机应用技术专业',
