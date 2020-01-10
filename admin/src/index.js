@@ -1,13 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-<<<<<<< HEAD
-import App from './App';
-// import 'antd/dist/antd.css'
-=======
 import App from '../src/router/router';
 // import 'antd/dist/antd.css';
->>>>>>> 01acc97b703c18ebbbb3feb15ab9b45183438719
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -14,5 +14,5 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 const admin = require('./admin/admin')
 app.use('/v1/admin',admin)
 app.listen(3001,(res)=>{
-	console.log("http://localhost:3000/v1/admin/good/getFoods")
+	console.log("http://192.168.137.1:3001/v1/admin/good/getFoods")
 })

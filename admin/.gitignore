@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/config
 /package-lock.json
 /package.json
 /.pnp
@@ -23,3 +24,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
