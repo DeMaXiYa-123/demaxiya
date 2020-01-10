@@ -12,12 +12,15 @@ export default class Day extends Component {
     }
   }
   render () {
+    setTimeout(_=>{
+      console.log(this.refs)
+    },1000)
     return (
       <div>
         <h1>Day</h1>
         <div className={styles.head}><DayHead></DayHead></div>
-        <H2></H2>
-        <Body ref="fnc"></Body>
+        <H2 ref="h2"></H2>
+        <Body ref="Body"></Body>
       </div>
     )
   }

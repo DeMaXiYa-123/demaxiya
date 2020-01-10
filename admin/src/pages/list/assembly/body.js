@@ -16,6 +16,7 @@ class Body extends Component {
       spinning: false
     }
   }
+
   componentDidMount () {
     let { page, pageSize } = this.state
     this.setState({spinning: true})
