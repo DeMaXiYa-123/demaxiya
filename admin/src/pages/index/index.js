@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './index.module.less'
 import Tab from '../../components/tab'
 import Nav from '../../components/nav'
+import Indexcont from './index-cont'
 import { Layout, Menu, Icon , message , Button , Dropdown} from 'antd';
 const { Header, Sider, Content } = Layout;
 
@@ -10,22 +11,6 @@ class Index extends React.Component{
         super();
         this.state={
             collapsed: false,
-            menu : (
-              <Menu onClick={this.handleMenuClick}>
-                <Menu.Item key="1">
-                  <Icon type="user" />
-                  个人信息
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Icon type="user" />
-                  个人设置
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <Icon type="user" />
-                  退出登录
-              </Menu.Item>
-              </Menu>
-            )
           };
     }
     toggle(){
@@ -47,15 +32,12 @@ class Index extends React.Component{
                   type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                   onClick={this.toggle.bind(this)}
                 />
-
-
-
               </Header>
               <Content
                 style={{
-                  margin: '24px 16px',
-                  padding: 24,
-                  background: '#fff',
+                  // margin: '0 16px',
+                  // padding: 24,
+                  background: '#f3f3f3',
                   minHeight: 280,
                 }}
               >
