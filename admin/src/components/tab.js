@@ -48,12 +48,12 @@ class Tab extends React.Component{
             }else{
                 return (
                     <Menu.Item key={item.id} className={styles.pl}>
-                        {/* <Link to={item.path||'/admin'}> */}
+                        <Link to={item.path||'/admin'}>
                             <span>
                                 <Icon type={item.icon||'home'} />
                                 <span>{item.name}</span>
                             </span>
-                        {/* </Link>                       */}
+                        </Link>                      
                     </Menu.Item>
                     )
             }
