@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import { Modal, Button, Form, Input, Upload, Icon, message  } from 'antd';
-import { AddGood } from '../../../api/goodsApi'
+import { Addyuebao } from '../../../api/goodsApi'
 import styles from './day-head.module.less'
 import  './day-head.module.less'
 
@@ -69,7 +69,7 @@ class DayHead extends Component {
           let time = getCurrentDate()
           let img = 'asd'
           let mark = false
-          AddGood(title, content, time, img, mark)
+          Addyuebao(title, content, time, img, mark)
           .then((res) => console.log(res))
           if(!err){
             this.setState({

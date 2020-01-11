@@ -13,15 +13,27 @@ class Body extends Component {
       id: 0,
       page: 0,
       pageSize: 10,
-      spinning: false
+      spinning: false,
+      uid: '5e171328f4bbb442483ceb3d'
     }
   }
-
+  componentWillReceiveProps(){
+    console.log(1)
+      let { page, pageSize } = this.state
+      this.setState({spinning: true})
+      console.log(2)
+      GetGoods(page,pageSize)
+      .then((res) => this.setState({data: res.data.list.foods,spinning: false},()=>{console.log(this.state.data)}))
+  }
   componentDidMount () {
     let { page, pageSize } = this.state
-    this.setState({spinning: true})
-    GetGoods(page,pageSize)
+    let data = localStorage.getItem('uid')
+    let id =  JSON.parse(data).data
+    this.setState({spinning: true,uid: id},()=> console.log(this.state.uid))
+    GetGoods(page,pageSize,id)
     .then((res) => this.setState({data: res.data.list.foods,spinning: false},()=>{console.log(this.state.data)}))
+    // .then((res) => console.log(res))
+
   }
   render () {
     let { id,page,pageSize,spinning } = this.state
@@ -96,7 +108,7 @@ class Body extends Component {
         }
       })
       this.setState({spinning: true})
-      GetGoods(page,pageSize)
+      GetGoods(page,pageSize,this.state.uid)
       .then((res) => this.setState({data: res.data.list.foods,spinning: false}))
     };
     this.handleCancel = e => {
@@ -155,8 +167,8 @@ class Body extends Component {
               </table>
           </div>
         </Spin>
-              <Pagination simple total={this.state.data.length} total={20} onChange={(page) => {
-                GetGoods(page,10)
+              <Pagination simple total={this.state.data.length} total={40} onChange={(page) => {
+                GetGoods(page,10,this.state.uid)
                 .then((res) => this.setState({data: res.data.list.foods}))
               }} style={{float: 'right',marginTop: '10px',margin: '30px'}} />
               <Modal

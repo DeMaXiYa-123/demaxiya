@@ -69,7 +69,9 @@ class DayHead extends Component {
           let time = getCurrentDate()
           let img = 'asd'
           let mark = false
-          AddGood(title, content, time, img, mark)
+          let id = localStorage.getItem('uid')
+          let uid =  JSON.parse(id).data
+          AddGood(title, content, time, img, mark, uid)
           .then((res) => console.log(res))
           if(!err){
             this.setState({
@@ -77,6 +79,11 @@ class DayHead extends Component {
             });
           }
         })
+        setTimeout(() => {
+          this.props.son()
+          // console.log(this)
+        }, 3000);
+
     };
     this.handleCancel = e => {
       console.log(e);

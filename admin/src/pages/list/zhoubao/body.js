@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Modal, Button, Form, Input, Upload, Table, Pagination, Icon, message, Spin, Alert } from 'antd';
 import styles from './day-head.module.less'
-import { GetGoods, UpdataGood } from '../../../api/goodsApi'
+import { Getzhoubao, Updatazhoubao } from '../../../api/goodsApi'
 
 
 class Body extends Component {
@@ -16,11 +16,20 @@ class Body extends Component {
       spinning: false
     }
   }
-
+  componentWillReceiveProps(){
+    console.log(1)
+    // setTimeout(() => {
+    //   let { page, pageSize } = this.state
+    //   this.setState({spinning: true})
+    //   console.log(2)
+    //   Getzhoubao(page,pageSize)
+    //   .then((res) => this.setState({data: res.data.list.foods,spinning: false},()=>{console.log(this.state.data)}))
+    // }, 5000);
+  }
   componentDidMount () {
     let { page, pageSize } = this.state
     this.setState({spinning: true})
-    GetGoods(page,pageSize)
+    Getzhoubao(page,pageSize)
     .then((res) => this.setState({data: res.data.list.foods,spinning: false},()=>{console.log(this.state.data)}))
   }
   render () {
@@ -87,7 +96,7 @@ class Body extends Component {
         let time = getCurrentDate()
         let img = 'asd'
         let mark = false
-        UpdataGood(id, title, content, time, img, mark)
+        Updatazhoubao(id, title, content, time, img, mark)
         .then((res) => console.log(res))
         if(!err){
           this.setState({
@@ -96,7 +105,7 @@ class Body extends Component {
         }
       })
       this.setState({spinning: true})
-      GetGoods(page,pageSize)
+      Getzhoubao(page,pageSize)
       .then((res) => this.setState({data: res.data.list.foods,spinning: false}))
     };
     this.handleCancel = e => {
@@ -156,7 +165,7 @@ class Body extends Component {
           </div>
         </Spin>
               <Pagination simple total={this.state.data.length} total={20} onChange={(page) => {
-                GetGoods(page,10)
+                Getzhoubao(page,10)
                 .then((res) => this.setState({data: res.data.list.foods}))
               }} style={{float: 'right',marginTop: '10px',margin: '30px'}} />
               <Modal

@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import { Modal, Button, Form, Input, Upload, Icon, message  } from 'antd';
-import { AddGood } from '../../../api/goodsApi'
+import { Addzhoubao } from '../../../api/goodsApi'
 import styles from './day-head.module.less'
 import  './day-head.module.less'
 
@@ -62,6 +62,7 @@ class DayHead extends Component {
       });
     };
     this.handleOk = e => {
+      // console.log(1)
       let {getFieldsValue, validateFields} = this.props.form
         validateFields((err,data) => {
           console.log(data)
@@ -69,7 +70,7 @@ class DayHead extends Component {
           let time = getCurrentDate()
           let img = 'asd'
           let mark = false
-          AddGood(title, content, time, img, mark)
+          Addzhoubao(title, content, time, img, mark)
           .then((res) => console.log(res))
           if(!err){
             this.setState({

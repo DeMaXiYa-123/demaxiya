@@ -1,18 +1,18 @@
 var mongoose = require('mongoose');
 // 存放和食品 数据操作的相关信息 数据库的操作
 const FoodModel= require('../db/model/foodModel')
-async function  add(title,content,img,time,mark){
+async function  add(title,content,img,time,mark,uid){
   // async 函数内部只要不出错 肯定走的是then 如果出错走的是catch
-   let result =await FoodModel.insertMany({title,content,img,time,mark})
+   let result =await FoodModel.insertMany({title,content,img,time,mark,uid})
   //  console.log(result)
   return result
 }
-async function get(page,pageSize){
+async function get(page,pageSize,uid){
   // 获取总的食品数据数组
   let allFoods =await FoodModel.find()
   // 获取视食品数据 总数量
   let allCount =allFoods.length 
-  let foods = await FoodModel.find().skip((page-1)*pageSize).limit(pageSize)
+  let foods = await FoodModel.find({uid}).skip((page-1)*pageSize).limit(pageSize)
   // let foods = await FoodModel.find()
   return  {foods,allCount}
 }
@@ -49,6 +49,6 @@ async function del(foodId){
   let result = await  FoodModel.deleteOne({_id:foodId})
   return result
 }
-get()
-.then((data)=>console.log(data))
+// get()
+// .then((data)=>console.log(data))
 module.exports={add,get,getByType,getByKw,del,update}
