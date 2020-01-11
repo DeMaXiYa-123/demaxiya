@@ -69,7 +69,9 @@ class DayHead extends Component {
           let time = getCurrentDate()
           let img = 'asd'
           let mark = false
-          Addyuebao(title, content, time, img, mark)
+          let id = localStorage.getItem('uid')
+          let uid =  JSON.parse(id).data
+          Addyuebao(title, content, time, img, mark, uid)
           .then((res) => console.log(res))
           if(!err){
             this.setState({

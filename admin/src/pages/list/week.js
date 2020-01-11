@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
-import DayHead from './assembly/day-head'
-import H2 from './assembly/h2'
-import Body from './assembly/body'
+import DayHead from './zhoubao/day-head'
+import H2 from './zhoubao/h2'
+import Body from './zhoubao/body'
 import styles from './day.module.less'
 
 export default class Day extends Component {
