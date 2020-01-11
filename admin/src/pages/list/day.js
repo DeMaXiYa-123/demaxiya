@@ -17,7 +17,7 @@ export default class Day extends Component {
     },1000)
     return (
       <div>
-        <h1>Day</h1>
+        <h1>`</h1>
         <div className={styles.head}><DayHead></DayHead></div>
         <H2 ref="h2"></H2>
         <Body ref="Body"></Body>

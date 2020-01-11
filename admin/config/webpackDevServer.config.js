@@ -89,9 +89,19 @@ module.exports = function(proxy, allowedHost) {
     public: allowedHost,
     proxy:{
       '/api':{
-        target:'http://192.168.137.20:3003',
+        target:'http://10.60.14.81:3003',
         changeOrigin:true,
         pathRewrite:{"^/api":''}
+      },
+      '/user':{
+        target:'http://10.60.14.81:3004',
+        changeOrigin:true,
+        pathRewrite:{"^/user":''}
+      },
+      '/not':{
+        target:'http://10.60.14.253:3001',
+        changeOrigin:true,
+        pathRewrite:{"^/not":''}
       }
     },
     before(app, server) {

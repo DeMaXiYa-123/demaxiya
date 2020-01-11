@@ -5,6 +5,7 @@
 /config
 /package-lock.json
 /package.json
+/config
 /.pnp
 .pnp.js
 

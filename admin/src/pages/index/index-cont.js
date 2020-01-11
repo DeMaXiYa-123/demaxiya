@@ -1,7 +1,7 @@
 import React, { Profiler } from 'react'
 import styles from '../../pages/index/index.module.less'
 import {Link} from 'react-router-dom'
-import { Icon, Button } from 'antd'
+import { Icon, Button , Select } from 'antd'
 import 'echarts/dist/echarts.js'
 import ReactEcharts from 'echarts-for-react'
 import axios from '../../utils/axios'
@@ -9,54 +9,10 @@ class Cont extends React.Component {
     constructor() {
         super()
         this.state = {
-            option: {
-                color: ['#1E90FF', '#BFEFFF'],
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{a} <br/>{b}: {c} ({d}%)'
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 10,
-                    data: ['已签到', '未签到']
-                },
-                series: [
-                    {
-                        name: '签到数量',
-                        type: 'pie',
-                        radius: ['50%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'center'
-                            },
-                            emphasis: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: '18',
-                                    fontWeight: 'bold'
-                                }
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                show: false
-                            }
-                        },
-                        data: [
-                            { value: 335, name: '已签到' },
-                            { value: 50, name: '未签到' },
-                        ]
-                    }
-                ]
-            },
-            list:[
-                    {title:'日报',src:'https://www.moguding.net/static/img/day.png',suc:'25',duc:'0',color:'#83a3ff'},
-                    {title:'周报',src:'https://www.moguding.net/static/img/week.png',suc:'6',duc:'53',color:'#66d3b8'},
-                    {title:'月报',src:'https://www.moguding.net/static/img/month.png',suc:'0',duc:'0',color:'#ad81ff'},
-                    {title:'总结',src:'https://www.moguding.net/static/img/sum.png',suc:'0',duc:'0',color:'#ffc251'}
-                ]
+            list:[],
+            rootList:[],
+            biglist:{},
+            flag:false
         }
     }
     btncss(value, e) {
@@ -67,36 +23,113 @@ class Cont extends React.Component {
             e.target.style.background = '#66d3b8'
         }
     }
+    handleChange(value) {
+        console.log(`selected ${value}`);
+      }
+      
     componentDidMount(){
-            for(let key in this.refs){
-                let i = key.slice(key.length-1,key.length)
-                // console.log(i)
-                this.refs[key].style.background = this.state.list[i].color
-            }
-            this.getData()
+            this.getData()    
     }
-    getData(){
-        let url = '/api/admin/user'
-        axios.post(url)
-        .then(data=>{
-            console.log(data)
-        })
+    option(){
+        let option = {
+            color: ['#1E90FF', '#BFEFFF'],
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 10,
+                data: ['已签到', '未签到']
+            },
+            series: [
+                {
+                    name: '签到数量',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '18',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: [
+                        { value: this.state.biglist.sign, name: '已签到' },
+                        { value: this.state.biglist.nosign, name: '未签到' },
+                    ]
+                }
+            ]
+        }
+        return option    
+    }
+    // componentDidMount(){
+    //     var token = JSON.parse(localStorage.getItem('token'))
+    //     if(token == null){
+    //       // this.props.history.push('/login')
+    //       console.log(this)
+    //     }
+    //     // console.log(token)
+    //   }
+    async getData(){
+        try {
+            let url = '/api/admin/user'
+            let userName = JSON.parse(localStorage.getItem('uid')).data
+            console.log(userName)
+            await axios.post(url,{userName})
+            .then(data=>{       
+                let value = data.data[0].reportlist;
+                console.log(value)
+                this.setState({list:value})
+                this.setState({rootList:data.data[0].rootList})
+                this.setState({biglist:data.data[0]})
+                if(this.state.list.length){
+                    for(let key in this.refs){
+                        let i = key.slice(key.length-1,key.length)
+                        // console.log(i)
+                        this.refs[key].style.background = this.state.list[i].color
+                    }
+                }
+            })
+            this.setState({flag:true})
+        }
+        catch(err) {
+        }
     }
     render() {
+        const { Option } = Select;
         return (
             <div>
                 <div className={styles.top}>
-                    <div className={styles.dressing}>2017级计算机应用技术专业顶岗实习方案<span><Icon type='down' /></span></div>
+                {this.state.flag || <img  style={{position:'absolute' ,width:'150px',height:'120px', top:'40%',left:'46%',zIndex:10}} src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578639325890&di=26fb7e43e94ad28d33afad06fd9befd1&imgtype=0&src=http%3A%2F%2Fimg.ui.cn%2Fdata%2Ffile%2F4%2F2%2F3%2F1814324.gif'></img>}
+                    {/* <div className={styles.dressing}>{this.state.biglist.grade}<span><Icon type='down' /></span></div> */}
+                    <div style={{float:'left',marginRight:'20px',marginLeft:'10px'}}>
+                        <Select defaultValue="grade" style={{ width: 200 }} onChange={this.handleChange}>
+                        <Option value="grade">{this.state.biglist.grade}顶岗实习方案</Option>
+                        </Select> 
+                    </div>
                     <Button onMouseOver={this.btncss.bind(this, 1)} onMouseOut={this.btncss.bind(this, 2)} type="search" style={{ background: '#66d3b8', color: '#fff', width: '90px', height: '32px', float: 'left', border: 0 }}>查询</Button>
                 </div>
                 <div style={{ width: '68%', height: '340px', background: '#fff', marginLeft: '16px', marginTop: '16px', borderRadius: '6px', float: 'left', marginRight: '22px' }}>
                     <h2 style={{ width: '100%', textAlign: 'left', paddingLeft: '16px', height: '57px', lineHeight: '57px', fontSize: '14px', fontWeight: '600', borderBottom: '1px solid #dde' }}>我的考勤</h2>
-                    <ReactEcharts option={this.state.option} style={{ width: '150px', marginLeft: '20%', marginTop: '3%', float: 'left' }}></ReactEcharts>
+                    <ReactEcharts option={this.option()} style={{ width: '160px', marginLeft: '20%', marginTop: '3%', float: 'left' }}></ReactEcharts>
                     <div style={{ width: '290px', height: '230px', padding: ' 0 20px', background: '#f8f8f8', float: 'left', marginLeft: '220px', marginTop: '15px' }}>
                         <ul>
-                            <li className={styles.rli}><Icon type='profile' style={{ marginRight: '12px', fontSize: '24px', color: 'rgb(87, 134, 255)' }}></Icon> 请假 <span style={{ float: 'right', marginRight: '12px' }}>0天</span></li>
-                            <li className={styles.rli}><Icon type="carry-out" style={{ marginRight: '12px', fontSize: '24px', color: 'rgb(78, 203, 115)' }} /> 补签<span style={{ float: 'right', marginRight: '12px' }}>10天</span></li>
-                            <li className={styles.rli}><Icon type="file-done" style={{ marginRight: '12px', fontSize: '24px', color: 'rgb(251, 193, 55)' }} /> 免签<span style={{ float: 'right', marginRight: '12px' }}>0天</span></li>
+                            <li className={styles.rli}><Icon type='profile' style={{ marginRight: '12px', fontSize: '24px', color: 'rgb(87, 134, 255)' }}></Icon> 请假 <span style={{ float: 'right', marginRight: '12px' }}>{this.state.rootList[0]}天</span></li>
+                            <li className={styles.rli}><Icon type="carry-out" style={{ marginRight: '12px', fontSize: '24px', color: 'rgb(78, 203, 115)' }} /> 补签<span style={{ float: 'right', marginRight: '12px' }}>{this.state.rootList[1]}天</span></li>
+                            <li className={styles.rli}><Icon type="file-done" style={{ marginRight: '12px', fontSize: '24px', color: 'rgb(251, 193, 55)' }} /> 免签<span style={{ float: 'right', marginRight: '12px' }}>{this.state.rootList[2]}天</span></li>
                         </ul>
                     </div>
                 </div>
@@ -121,5 +154,10 @@ class Cont extends React.Component {
     }
 
 }
-
 export default Cont
+
+
+
+
+
+

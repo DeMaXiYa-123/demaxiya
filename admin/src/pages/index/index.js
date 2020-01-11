@@ -3,6 +3,7 @@ import styles from './index.module.less'
 import Tab from '../../components/tab'
 import Nav from '../../components/nav'
 import Indexcont from './index-cont'
+import {withRouter} from 'react-router-dom'
 import { Layout, Menu, Icon , message , Button , Dropdown} from 'antd';
 const { Header, Sider, Content } = Layout;
 
@@ -11,12 +12,19 @@ class Index extends React.Component{
         super();
         this.state={
             collapsed: false,
+            flag:false,
           };
     }
     toggle(){
         this.setState({collapsed: !this.state.collapsed})
     }
-
+    componentDidMount(){
+      var token = JSON.parse(localStorage.getItem('token'))
+      if(token == null){
+                this.props.history.replace('/login')
+                console.log(this)
+              }
+    }
     render(){
         return(
             <Layout className={styles.admin}>
@@ -49,4 +57,4 @@ class Index extends React.Component{
     }
 }
 
-export default Index
+export default withRouter(Index)

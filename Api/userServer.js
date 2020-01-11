@@ -18,7 +18,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 const admin = require('./admin/admin')
 const tokenMiddleWare = require('./middleware/token')
 app.use('/v1/admin',tokenMiddleWare,admin)
-app.listen(3003,(res)=>{
+app.listen(3004,(res)=>{
 
-	console.log('server start in '+3000)
+	console.log('server start in '+3004)
 })

@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from '../pages/index/index.module.less'
 import axios from '../utils/axios'
-import { Layout, Menu, Icon , message , Button , Dropdown , Modal} from 'antd';
+import {withRouter} from 'react-router-dom'
+import { Layout, Menu, Icon , message , Button , Dropdown , Modal , Select } from 'antd';
 class Nav extends React.Component{
     constructor(){
         super();
@@ -34,7 +35,9 @@ class Nav extends React.Component{
             list:['xxx通过了补签申请？','xxx通过了补签申请？','xxx通过了补签申请？','xxx通过了补签申请？'],
             visible: false,
             visible2 : false,
+            visible3:false,
             userName:'',
+            biglist:[]
           };  
     }
     menu3(list){
@@ -60,27 +63,36 @@ class Nav extends React.Component{
           this.setState({visible2:true})
           console.log(1)
         }
+        if(e.key == 3){
+          this.setState({visible3:true})
+        }
       }
     getData(){
       let url = '/api/admin/user'
-      axios.post(url)
-      .then(data=>{
-          console.log(data.data[0])
-          this.setState({list:data.data[0].noticelist})
-          this.setState({userName:data.data[0].userName})
-
-      })
-      
+      try {
+        let userName = JSON.parse(localStorage.getItem('uid')).data
+        axios.post(url,{userName})
+        .then(data=>{
+            console.log(data.data[0])
+            this.setState({list:data.data[0].noticelist})
+            this.setState({userName:data.data[0].name})
+            this.setState({biglist:data.data[0]})
+        })
+      }
+      catch(err) {
+      }
     }
     componentDidMount(){
         this.getData()
+        console.log(this)
     }
     render(){
+      let vb = true;
         return(
             <div className={styles.nav}>
                     <h2 className={styles.logo}>
                         <img src='https://qiniu.gongxueyun.com/upload/55ed9debfe9c097bff8393091c520d2b.png'></img>
-                        五道口职业技术学院
+                        {this.state.biglist.school}
                     </h2>
                     <div className={styles.btn}>
                       <Dropdown overlay={this.state.menu2} >
@@ -92,7 +104,7 @@ class Nav extends React.Component{
 
                       <Dropdown overlay={this.menu3.bind(this,this.state.list)}>
                         <a className="ant-dropdown-link" href="#">
-                        <Icon type="bell" theme="filled" style={{color:'#fff',lineHeight:'35px'}} onClick={this.showModal} /> <span style={{background:'#f56c6c',display:'block',position:'absolute', width:'26px',height:'18px',color:'#fff',borderRadius:'8px',lineHeight:'18px',fontSize:'12px',top:'-2px',left:'90px',textAlign:'center'}}>11</span>
+                        <Icon type="bell" theme="filled" style={{color:'#fff',lineHeight:'35px'}} onClick={this.showModal} /> <span style={{background:'#f56c6c',display:'block',position:'absolute', width:'26px',height:'18px',color:'#fff',borderRadius:'8px',lineHeight:'18px',fontSize:'12px',top:'-2px',left:'90px',textAlign:'center'}}>{this.state.list.length}</span>
                         </a>
                       </Dropdown>
 
@@ -107,6 +119,8 @@ class Nav extends React.Component{
                         <Modal
                           title="个人信息"
                           visible={this.state.visible2}
+                          cancelText='取消'
+                          okText='确定'
                           onOk={()=>{
                             this.setState({visible2:false})
                           }}
@@ -114,11 +128,32 @@ class Nav extends React.Component{
                             this.setState({visible2:false})
                           }}
                         >
-                          <p>姓名  &nbsp;赵子琦</p>
-                          <p>学校  &nbsp;五道口职业技术学院</p>
+                          <p>姓名  &nbsp;{this.state.userName}</p>
+                          <p>学校  &nbsp;{this.state.biglist.school}</p>
                           <p>院系  &nbsp;计算机工程系</p>
                           <p>专业  &nbsp;计算机应用技术</p>
-                          <p>班级  &nbsp;计应A1703</p>
+                          <p>班级  &nbsp;{this.state.biglist.grade}</p>
+                        </Modal>
+                    </div>
+                    <div>
+                        <Modal
+                          title="提示"
+                          visible={this.state.visible3}
+                          cancelText='取消'
+                          okText='确定'
+                          centered={vb}
+                          onOk={()=>{
+                            this.setState({visible3:false})
+                            localStorage.removeItem('token')
+                            localStorage.removeItem('rootlist')
+                            localStorage.removeItem('uid')
+                            this.props.history.replace('/login')
+                          }}
+                          onCancel={()=>{
+                            this.setState({visible3:false})
+                          }}
+                        >
+                          你确定进行退出操作吗？
                         </Modal>
                     </div>
                    </div>                
@@ -128,4 +163,4 @@ class Nav extends React.Component{
 }
 
 
-export default Nav
+export default withRouter(Nav)
